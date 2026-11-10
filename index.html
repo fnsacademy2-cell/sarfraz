@@ -1,0 +1,2105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0d5c3a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="SARFRAZ General and Grossary Store Newjatoi - Mobile Customer MIS & Billing App">
+    <title>SARFRAZ General and Grossary Store Newjatoi</title>
+
+    <!-- Google Fonts (Roboto) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        :root {
+            --android-primary: #0d5c3a;
+            --android-primary-light: #15803d;
+            --android-accent: #22c55e;
+            --android-bg: #f1f5f9;
+            --android-card-bg: #ffffff;
+            --android-text: #0f172a;
+            --android-text-muted: #64748b;
+            --android-border: #e2e8f0;
+            --android-danger: #dc2626;
+            --android-warning: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--android-bg);
+            color: var(--android-text);
+            margin: 0;
+            padding: 0;
+            padding-bottom: 85px;
+            /* space for bottom navigation bar */
+            user-select: none;
+        }
+
+        input,
+        textarea,
+        select {
+            user-select: auto;
+        }
+
+        /* Android Top App Bar */
+        .android-top-bar {
+            background: linear-gradient(135deg, #093f27, #15803d);
+            color: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+            padding: 12px 16px;
+        }
+
+        .android-brand-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .app-store-logo {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: #ffffff;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .store-header-title {
+            font-weight: 800;
+            font-size: 1.05rem;
+            margin: 0;
+            line-height: 1.25;
+            letter-spacing: -0.2px;
+        }
+
+        .store-header-subtitle {
+            font-size: 0.72rem;
+            opacity: 0.88;
+        }
+
+        /* Android Bottom Navigation Bar */
+        .android-bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            z-index: 1040;
+            box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.07);
+            padding: 0 6px;
+        }
+
+        .android-nav-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.72rem;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 16px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .android-nav-button i {
+            font-size: 1.25rem;
+            margin-bottom: 3px;
+            transition: transform 0.2s;
+        }
+
+        .android-nav-button.active {
+            color: #0d5c3a;
+            font-weight: 700;
+        }
+
+        .android-nav-button.active i {
+            transform: scale(1.15);
+            color: #0d5c3a;
+        }
+
+        /* Android Center Floating Action Button (FAB) */
+        .android-center-fab {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #15803d, #22c55e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            box-shadow: 0 6px 18px rgba(21, 128, 61, 0.45);
+            margin-top: -26px;
+            border: 3.5px solid #ffffff;
+            font-size: 1.55rem;
+            cursor: pointer;
+            transition: transform 0.15s ease;
+        }
+
+        .android-center-fab:active {
+            transform: scale(0.92);
+        }
+
+        /* Material Android App Cards */
+        .android-app-card {
+            background: var(--android-card-bg);
+            border-radius: 18px;
+            border: 1px solid var(--android-border);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            padding: 16px;
+            margin-bottom: 14px;
+            transition: transform 0.15s ease;
+        }
+
+        .android-app-card:active {
+            transform: scale(0.995);
+        }
+
+        .status-chip {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .chip-overdue {
+            background-color: #fee2e2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+        }
+
+        .chip-today {
+            background-color: #fef3c7;
+            color: #b45309;
+            border: 1px solid #fde68a;
+        }
+
+        .chip-cleared {
+            background-color: #dcfce7;
+            color: #15803d;
+            border: 1px solid #bbf7d0;
+        }
+
+        /* Tab Display Controller */
+        .app-tab-pane {
+            display: none;
+            padding: 14px 12px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .app-tab-pane.active {
+            display: block;
+            animation: tabFadeIn 0.25s ease-out;
+        }
+
+        @keyframes tabFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hero Banner */
+        .hero-metric-banner {
+            background: linear-gradient(135deg, #093f27, #166534);
+            color: #ffffff;
+            border-radius: 20px;
+            padding: 18px;
+            box-shadow: 0 6px 18px rgba(9, 63, 39, 0.28);
+            margin-bottom: 16px;
+        }
+
+        .mini-stat-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 14px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+            height: 100%;
+        }
+
+        /* Buttons */
+        .btn-android-main {
+            background: #0d5c3a;
+            color: #ffffff;
+            border-radius: 14px;
+            font-weight: 600;
+            padding: 12px 18px;
+            border: none;
+            box-shadow: 0 3px 10px rgba(13, 92, 58, 0.25);
+            transition: all 0.2s;
+        }
+
+        .btn-android-main:active {
+            background: #093f27;
+            transform: scale(0.97);
+        }
+
+        .btn-android-green {
+            background: #16a34a;
+            color: #ffffff;
+            border-radius: 14px;
+            font-weight: 600;
+            padding: 12px 18px;
+            border: none;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 12px;
+            padding: 10px 14px;
+            border: 1.5px solid #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #0d5c3a;
+            box-shadow: 0 0 0 3px rgba(13, 92, 58, 0.15);
+        }
+
+        @media print {
+            body {
+                background: #fff !important;
+                padding: 0 !important;
+            }
+
+            .no-print,
+            .android-top-bar,
+            .android-bottom-bar,
+            .btn,
+            .modal {
+                display: none !important;
+            }
+
+            .print-receipt-sheet {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= ANDROID TOP APP BAR ================= -->
+    <header class="android-top-bar no-print">
+        <div class="android-brand-wrap">
+            <div class="d-flex align-items-center">
+                <div class="app-store-logo">
+                    <i class="fa-solid fa-store"></i>
+                </div>
+                <div>
+                    <h5 class="store-header-title" id="appHeaderName">SARFRAZ General and Grossary Store Newjatoi</h5>
+                    <div class="store-header-subtitle"><i class="fa-solid fa-location-dot me-1"></i> Newjatoi, Sindh •
+                        Customer Khata MIS</div>
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-sm btn-light bg-opacity-25 text-white border-0 rounded-circle p-2"
+                    onclick="switchAndroidTab('settings')" title="Settings">
+                    <i class="fa-solid fa-gear"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Notification Toast -->
+    <div class="container-fluid px-3 pt-2 no-print" id="toastBox" style="display: none;">
+        <div class="alert alert-success alert-dismissible fade show shadow-sm py-2 px-3 small rounded-3" role="alert">
+            <span id="toastMsg">Action completed</span>
+            <button type="button" class="btn-close py-2"
+                onclick="document.getElementById('toastBox').style.display='none'"></button>
+        </div>
+    </div>
+
+    <!-- ================= ANDROID BOTTOM NAVIGATION BAR ================= -->
+    <nav class="android-bottom-bar no-print">
+        <div class="android-nav-button active" id="btn-nav-home" onclick="switchAndroidTab('home')">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </div>
+        <div class="android-nav-button" id="btn-nav-customers" onclick="switchAndroidTab('customers')">
+            <i class="fa-solid fa-users"></i>
+            <span>Khata</span>
+        </div>
+        <!-- Center Floating Action Button (FAB) -->
+        <div class="android-center-fab" onclick="switchAndroidTab('new-bill')" title="Create New Bill">
+            <i class="fa-solid fa-plus"></i>
+        </div>
+        <div class="android-nav-button" id="btn-nav-salary" onclick="switchAndroidTab('salary')">
+            <i class="fa-solid fa-calendar-check"></i>
+            <span>Salary</span>
+        </div>
+        <div class="android-nav-button" id="btn-nav-bills" onclick="switchAndroidTab('bills')">
+            <i class="fa-solid fa-file-invoice"></i>
+            <span>Bills</span>
+        </div>
+    </nav>
+
+    <!-- ================= MAIN APP SCREENS ================= -->
+
+    <!-- SCREEN 1: HOME DASHBOARD -->
+    <section id="pane-home" class="app-tab-pane active">
+        <!-- Hero Total Udhar Card -->
+        <div class="hero-metric-banner">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <span class="small text-uppercase opacity-75 fw-bold" style="letter-spacing: 0.5px;">Total Market
+                        Dues (ادھار / Khata)</span>
+                    <h2 class="fw-bold mt-1 mb-0" id="dashTotalDues">Rs. 0.00</h2>
+                    <small class="opacity-80" id="dashDuesCount">0 clients owe money</small>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-circle p-3 text-white fs-4">
+                    <i class="fa-solid fa-hand-holding-dollar"></i>
+                </div>
+            </div>
+            <div class="d-flex gap-2 mt-3 pt-2 border-top border-white border-opacity-25">
+                <button class="btn btn-sm btn-light fw-bold flex-fill rounded-pill py-2"
+                    onclick="switchAndroidTab('new-bill')">
+                    <i class="fa-solid fa-cart-plus me-1 text-success"></i> New Bill
+                </button>
+                <button class="btn btn-sm btn-outline-light fw-bold flex-fill rounded-pill py-2"
+                    onclick="openReceivePaymentModal()">
+                    <i class="fa-solid fa-money-bill-wave me-1"></i> Receive Cash
+                </button>
+            </div>
+        </div>
+
+        <!-- 2 Mini Stats -->
+        <div class="row g-2 mb-3">
+            <div class="col-6">
+                <div class="mini-stat-card">
+                    <span class="text-muted small fw-bold text-uppercase">Total Sales</span>
+                    <h5 class="fw-bold text-primary mt-1 mb-0" id="dashTotalSales">Rs. 0.00</h5>
+                    <small class="text-muted" id="dashBillsCount">0 bills</small>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="mini-stat-card">
+                    <span class="text-muted small fw-bold text-uppercase">Cash Collections</span>
+                    <h5 class="fw-bold text-success mt-1 mb-0" id="dashTotalCollected">Rs. 0.00</h5>
+                    <small class="text-muted" id="dashPaymentsCount">0 receipts</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Salary Due Alert Box -->
+        <div class="android-app-card border-start border-danger border-4">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="fw-bold text-danger">
+                    <i class="fa-solid fa-bell me-1"></i> Salary Dues Alert (تنخواہ ادھار)
+                </span>
+                <span class="badge bg-danger rounded-pill" id="homeAlertCount">0</span>
+            </div>
+            <div id="homeSalaryAlertsContainer"></div>
+        </div>
+
+        <!-- Quick 4 Tiles -->
+        <div class="d-flex justify-content-between align-items-center mb-2 px-1">
+            <h6 class="fw-bold text-dark mb-0">Quick Operations</h6>
+            <small class="text-success fw-bold" onclick="switchAndroidTab('customers')" style="cursor: pointer;">View
+                All Khata <i class="fa-solid fa-chevron-right"></i></small>
+        </div>
+
+        <div class="row g-2 mb-3">
+            <div class="col-3 text-center" onclick="openNewCustomerModal()" style="cursor: pointer;">
+                <div class="p-3 bg-white rounded-4 border text-primary shadow-sm mb-1">
+                    <i class="fa-solid fa-user-plus fs-4"></i>
+                </div>
+                <small class="fw-semibold">Add Client</small>
+            </div>
+            <div class="col-3 text-center" onclick="switchAndroidTab('new-bill')" style="cursor: pointer;">
+                <div class="p-3 bg-white rounded-4 border text-success shadow-sm mb-1">
+                    <i class="fa-solid fa-cash-register fs-4"></i>
+                </div>
+                <small class="fw-semibold">New Bill</small>
+            </div>
+            <div class="col-3 text-center" onclick="openReceivePaymentModal()" style="cursor: pointer;">
+                <div class="p-3 bg-white rounded-4 border text-warning shadow-sm mb-1">
+                    <i class="fa-solid fa-hand-holding-dollar fs-4"></i>
+                </div>
+                <small class="fw-semibold">Payment</small>
+            </div>
+            <div class="col-3 text-center" onclick="switchAndroidTab('salary')" style="cursor: pointer;">
+                <div class="p-3 bg-white rounded-4 border text-danger shadow-sm mb-1">
+                    <i class="fa-solid fa-calendar-check fs-4"></i>
+                </div>
+                <small class="fw-semibold">Salaries</small>
+            </div>
+        </div>
+
+        <!-- Recent Bills -->
+        <div class="d-flex justify-content-between align-items-center mb-2 px-1">
+            <h6 class="fw-bold text-dark mb-0">Recent Customer Bills</h6>
+            <small class="text-success fw-bold" onclick="switchAndroidTab('bills')" style="cursor: pointer;">See
+                All</small>
+        </div>
+        <div id="homeRecentBillsList"></div>
+    </section>
+
+    <!-- SCREEN 2: CUSTOMERS (KHATA REGISTER) -->
+    <section id="pane-customers" class="app-tab-pane">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold text-dark mb-0"><i class="fa-solid fa-users text-success me-1"></i> Customer Khata
+                Directory</h5>
+            <button class="btn btn-sm btn-android-main" onclick="openNewCustomerModal()">
+                <i class="fa-solid fa-plus me-1"></i> New Client
+            </button>
+        </div>
+
+        <!-- Mobile Search Input -->
+        <div class="mb-3">
+            <div class="input-group shadow-sm">
+                <span class="input-group-text bg-white border-end-0 text-muted"><i
+                        class="fa-solid fa-magnifying-glass"></i></span>
+                <input type="text" id="custSearchInput" class="form-control border-start-0"
+                    placeholder="Search customer name or phone..." oninput="renderCustomersList()">
+            </div>
+        </div>
+
+        <!-- Filter Chips -->
+        <div class="d-flex gap-2 overflow-auto pb-2 mb-2">
+            <button class="btn btn-sm btn-dark rounded-pill px-3 py-1 flex-shrink-0" id="chipAll"
+                onclick="setCustomerFilter('all')">All Customers</button>
+            <button class="btn btn-sm btn-outline-danger rounded-pill px-3 py-1 flex-shrink-0" id="chipDues"
+                onclick="setCustomerFilter('dues')">Has Dues (بقایا)</button>
+            <button class="btn btn-sm btn-outline-warning text-dark rounded-pill px-3 py-1 flex-shrink-0"
+                id="chipOverdue" onclick="setCustomerFilter('overdue')">Salary Overdue</button>
+        </div>
+
+        <!-- Customer Cards List -->
+        <div id="customersCardsContainer"></div>
+    </section>
+
+    <!-- SCREEN 3: CUSTOMER DETAIL & ACCOUNT STATEMENT (KHATA) -->
+    <section id="pane-customer-detail" class="app-tab-pane">
+        <div class="d-flex align-items-center justify-content-between mb-3 no-print">
+            <button class="btn btn-sm btn-light border rounded-pill px-3" onclick="switchAndroidTab('customers')">
+                <i class="fa-solid fa-arrow-left me-1"></i> Back
+            </button>
+            <div class="d-flex gap-2">
+                <a id="detailWhatsAppBtn" target="_blank" class="btn btn-sm btn-success rounded-pill px-3">
+                    <i class="fa-brands fa-whatsapp me-1"></i> WhatsApp
+                </a>
+                <button onclick="window.print()" class="btn btn-sm btn-outline-dark rounded-pill px-3">
+                    <i class="fa-solid fa-print me-1"></i> Print
+                </button>
+            </div>
+        </div>
+
+        <!-- Profile Card -->
+        <div class="android-app-card border-top border-success border-4 mb-3">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <h5 class="fw-bold text-dark mb-1" id="detailCustName">-</h5>
+                    <div class="small text-muted mb-1" id="detailCustPhone">-</div>
+                    <div class="small text-muted" id="detailCustAddress">-</div>
+                </div>
+                <div class="text-end">
+                    <span class="small text-muted text-uppercase fw-bold">Balance Due:</span>
+                    <h3 class="fw-bold text-danger mb-0" id="detailNetBalance">Rs. 0.00</h3>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top">
+                <span class="badge bg-secondary" id="detailSalaryDay">Salary on -th</span>
+                <span class="status-chip" id="detailSalaryBadge">Status</span>
+            </div>
+            <div class="d-flex gap-2 mt-3">
+                <button class="btn btn-sm btn-success flex-fill rounded-3 py-2 fw-bold"
+                    onclick="openNewBillForCustomer(currentDetailCustId)">
+                    <i class="fa-solid fa-cart-plus me-1"></i> Add Bill
+                </button>
+                <button class="btn btn-sm btn-primary flex-fill rounded-3 py-2 fw-bold"
+                    onclick="openReceivePaymentModal(currentDetailCustId)">
+                    <i class="fa-solid fa-hand-holding-dollar me-1"></i> Receive Cash
+                </button>
+            </div>
+        </div>
+
+        <!-- Ledger Entries -->
+        <h6 class="fw-bold text-dark mb-2 px-1"><i class="fa-solid fa-list-check text-primary me-1"></i> Khata
+            Transactions Ledger</h6>
+        <div class="android-app-card p-0 overflow-hidden shadow-sm">
+            <div class="table-responsive mb-0">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Date & Ref</th>
+                            <th>Description</th>
+                            <th class="text-end">Debit</th>
+                            <th class="text-end">Credit</th>
+                            <th class="text-end">Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detailLedgerBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCREEN 4: POS NEW BILL (SMART ANDROID BILLING) -->
+    <section id="pane-new-bill" class="app-tab-pane">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold text-dark mb-0"><i class="fa-solid fa-cash-register text-success me-1"></i> Create
+                Grocery Bill</h5>
+            <span class="small text-muted">Newjatoi Counter</span>
+        </div>
+
+        <form id="newBillForm" onsubmit="saveNewBill(event)">
+            <!-- Customer Picker Card -->
+            <div class="android-app-card mb-3">
+                <label class="form-label small fw-bold text-uppercase text-secondary">Customer (گاہک منتخب کریں) <span
+                        class="text-danger">*</span></label>
+                <select id="billCustomerSelect" class="form-select mb-2" required onchange="onBillCustomerChange()">
+                    <option value="">-- Select Customer --</option>
+                </select>
+                <div id="billCustomerBadge" class="small"></div>
+            </div>
+
+            <!-- Quick Add from Grocery Inventory -->
+            <div class="android-app-card mb-3 bg-light border-dashed">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="small fw-bold text-dark"><i class="fa-solid fa-bolt text-warning me-1"></i> Quick Add
+                        Grocery Item:</span>
+                </div>
+                <select id="quickProductPicker" class="form-select" onchange="quickAddProductToBill()">
+                    <option value="">-- Choose item from catalog --</option>
+                </select>
+            </div>
+
+            <!-- Items List -->
+            <div class="android-app-card mb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="fw-bold small text-dark"><i class="fa-solid fa-basket-shopping text-primary me-1"></i>
+                        Bill Items</span>
+                    <button type="button" class="btn btn-sm btn-outline-success py-1 px-2 rounded-pill"
+                        onclick="addBillItemRow()">
+                        <i class="fa-solid fa-plus me-1"></i> Add Item
+                    </button>
+                </div>
+                <div id="billItemsContainer"></div>
+            </div>
+
+            <!-- Payment & Dues Summary Card (Handles exact 600 bill - 500 paid = 100 due) -->
+            <div class="android-app-card bg-white border-2 border-success mb-3">
+                <h6 class="fw-bold text-dark mb-3"><i class="fa-solid fa-calculator me-1"></i> Bill Payment & Dues</h6>
+
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="text-muted small">Subtotal:</span>
+                    <span class="fw-bold" id="billSubtotalDisplay">Rs. 0.00</span>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="text-muted small">Discount (چھوٹ):</span>
+                    <input type="number" step="0.01" min="0" id="billDiscountInput"
+                        class="form-control form-control-sm text-end w-50" value="0" oninput="calculateBillTotals()">
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light mb-3">
+                    <span class="fw-bold text-dark">Net Bill Total:</span>
+                    <span class="fw-bold text-dark fs-5" id="billNetDisplay">Rs. 0.00</span>
+                </div>
+
+                <!-- Customer Pays partial (e.g. 500 on 600) -->
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <label class="form-label fw-bold text-success mb-0 small">Amount Paid Now (نقد وصولی):</label>
+                        <div class="btn-group btn-group-sm">
+                            <button type="button" class="btn btn-outline-danger py-0 px-2"
+                                onclick="setQuickPayment('zero')">Full Udhar (0)</button>
+                            <button type="button" class="btn btn-outline-success py-0 px-2"
+                                onclick="setQuickPayment('exact')">Full Paid</button>
+                        </div>
+                    </div>
+                    <input type="number" step="0.01" min="0" id="billPaidNowInput"
+                        class="form-control form-control-lg fw-bold text-success text-end" value="0"
+                        oninput="calculateBillTotals()">
+                    <div class="form-text small">e.g. if bill is 600 and customer pays 500, enter 500 here</div>
+                </div>
+
+                <!-- Cash Tendered & Change Return -->
+                <div class="p-2 mb-3 bg-light rounded border">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="small text-muted">Cash Tendered by Customer:</span>
+                        <input type="number" step="0.01" id="cashTenderedInput"
+                            class="form-control form-control-sm text-end w-50" placeholder="e.g. 1000"
+                            oninput="calculateChangeReturn()">
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center pt-1 border-top">
+                        <span class="small fw-bold text-dark">Change to Return (واپسی):</span>
+                        <span class="fw-bold text-primary" id="changeReturnDisplay">Rs. 0.00</span>
+                    </div>
+                </div>
+
+                <!-- Live Dues Preview (100 due) -->
+                <div class="p-3 rounded mb-3" style="background-color: #fef2f2; border: 1.5px solid #fecaca;">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="text-danger fw-bold small">Remaining Due on this Bill (بقایا):</span>
+                        <span class="fw-bold text-danger fs-5" id="billDueDisplay">Rs. 0.00</span>
+                    </div>
+                    <div
+                        class="d-flex justify-content-between align-items-center pt-2 border-top border-danger border-opacity-25">
+                        <span class="text-secondary small">Customer Total New Khata Balance:</span>
+                        <span class="fw-bold text-dark" id="billNewCustomerBalanceDisplay">Rs. 0.00</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-android-green w-100 py-3 fs-6 shadow-sm">
+                    <i class="fa-solid fa-check-circle me-1"></i> Save Bill & Print Receipt
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <!-- SCREEN 5: BILL VIEW & PRINT RECEIPT -->
+    <section id="pane-bill-view" class="app-tab-pane">
+        <div class="d-flex justify-content-between align-items-center mb-3 no-print">
+            <button class="btn btn-sm btn-light border rounded-pill px-3" onclick="switchAndroidTab('bills')">
+                <i class="fa-solid fa-arrow-left me-1"></i> Back to Bills
+            </button>
+            <div class="d-flex gap-2">
+                <button onclick="window.print()" class="btn btn-sm btn-dark rounded-pill px-3">
+                    <i class="fa-solid fa-print me-1"></i> Print
+                </button>
+                <a id="viewBillWhatsAppBtn" target="_blank" class="btn btn-sm btn-success rounded-pill px-3">
+                    <i class="fa-brands fa-whatsapp me-1"></i> WhatsApp
+                </a>
+                <button class="btn btn-sm btn-outline-primary rounded-pill px-3"
+                    onclick="openEditBillModal(currentViewBillId)">
+                    <i class="fa-solid fa-pen-to-square me-1"></i> Edit
+                </button>
+            </div>
+        </div>
+
+        <div class="android-app-card print-receipt-sheet bg-white p-3 p-md-4">
+            <div class="text-center border-bottom pb-3 mb-3">
+                <h4 class="fw-bold text-dark mb-0" id="receiptShopName">SARFRAZ General and Grossary Store Newjatoi</h4>
+                <div class="small text-muted" id="receiptShopTagline">Fresh Groceries & Monthly Khata Facility</div>
+                <div class="small text-muted mt-1" id="receiptShopContact">Newjatoi, Sindh • Phone: +92 300 1234567
+                </div>
+                <div class="mt-2"><span class="badge bg-dark px-3 py-1">GROCERY BILL RECEIPT</span></div>
+            </div>
+
+            <div class="d-flex justify-content-between small mb-3">
+                <div>
+                    <strong>Bill No:</strong> <span class="text-primary fw-bold" id="receiptBillNo">BILL-0001</span><br>
+                    <strong>Date:</strong> <span id="receiptBillDate">-</span>
+                </div>
+                <div class="text-end">
+                    <strong>Customer:</strong> <span class="fw-bold" id="receiptCustomerName">-</span><br>
+                    <span id="receiptSalaryDay" class="badge bg-secondary">Salary: -th</span>
+                </div>
+            </div>
+
+            <div class="table-responsive mb-3">
+                <table class="table table-bordered table-sm align-middle">
+                    <thead class="table-light small">
+                        <tr>
+                            <th>Item Description</th>
+                            <th class="text-center">Qty</th>
+                            <th class="text-end">Price</th>
+                            <th class="text-end">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="receiptItemsBody"></tbody>
+                </table>
+            </div>
+
+            <div class="row justify-content-end mb-3">
+                <div class="col-8 col-sm-6">
+                    <table class="table table-sm table-borderless mb-0 small">
+                        <tr>
+                            <td class="text-muted">Subtotal:</td>
+                            <td class="text-end fw-semibold" id="receiptSubtotal">Rs. 0.00</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted">Discount:</td>
+                            <td class="text-end text-success fw-semibold" id="receiptDiscount">Rs. 0.00</td>
+                        </tr>
+                        <tr class="border-top border-bottom border-dark">
+                            <td class="fw-bold fs-6">Net Bill Total:</td>
+                            <td class="text-end fw-bold fs-6" id="receiptNetAmount">Rs. 0.00</td>
+                        </tr>
+                        <tr>
+                            <td class="text-success fw-bold">Paid Now:</td>
+                            <td class="text-end text-success fw-bold" id="receiptPaidNow">Rs. 0.00</td>
+                        </tr>
+                        <tr class="table-danger">
+                            <td class="text-danger fw-bold">Due on Bill (بقایا):</td>
+                            <td class="text-end text-danger fw-bold" id="receiptDueNow">Rs. 0.00</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="alert alert-light border small text-center mb-0" id="receiptTotalCustomerDue">
+                Total Customer Outstanding Balance: Rs. 0.00
+            </div>
+            <div class="text-center text-muted small mt-3" id="receiptFooterMsg">
+                Thank you for your visit! Please clear dues on salary day.
+            </div>
+        </div>
+    </section>
+
+    <!-- SCREEN 6: ALL BILLS REGISTER -->
+    <section id="pane-bills" class="app-tab-pane">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold text-dark mb-0"><i class="fa-solid fa-file-invoice-dollar text-success me-1"></i> Bills
+                Register</h5>
+            <button class="btn btn-sm btn-android-main" onclick="switchAndroidTab('new-bill')">
+                <i class="fa-solid fa-plus me-1"></i> New Bill
+            </button>
+        </div>
+        <div id="billsCardsContainer"></div>
+    </section>
+
+    <!-- SCREEN 7: SALARY DUES TRACKER -->
+    <section id="pane-salary" class="app-tab-pane">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold text-dark mb-0"><i class="fa-solid fa-calendar-check text-success me-1"></i> Monthly
+                Salary Due Tracker</h5>
+            <button class="btn btn-sm btn-outline-success rounded-pill" onclick="exportDuesToCSV()">
+                <i class="fa-solid fa-file-csv me-1"></i> CSV
+            </button>
+        </div>
+
+        <div class="row g-2 mb-3">
+            <div class="col-6">
+                <div class="mini-stat-card border-danger border-start border-4">
+                    <span class="text-muted small fw-bold">OVERDUE</span>
+                    <h5 class="fw-bold text-danger mt-1 mb-0" id="salaryOverdueTotal">Rs. 0.00</h5>
+                    <small class="text-muted" id="salaryOverdueCount">0 clients</small>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="mini-stat-card border-warning border-start border-4">
+                    <span class="text-muted small fw-bold">DUE TODAY</span>
+                    <h5 class="fw-bold text-warning mt-1 mb-0" id="salaryTodayTotal">Rs. 0.00</h5>
+                    <small class="text-muted" id="salaryTodayCount">0 clients</small>
+                </div>
+            </div>
+        </div>
+
+        <h6 class="fw-bold text-danger mb-2"><i class="fa-solid fa-triangle-exclamation me-1"></i> Overdue Past Salary
+            Day</h6>
+        <div id="salaryOverdueList" class="mb-4"></div>
+
+        <h6 class="fw-bold text-primary mb-2"><i class="fa-solid fa-clock me-1"></i> Salary Due Soon / Today</h6>
+        <div id="salaryUpcomingList"></div>
+    </section>
+
+    <!-- SCREEN 8: SETTINGS & BACKUP -->
+    <section id="pane-settings" class="app-tab-pane">
+        <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-gear text-secondary me-1"></i> Shop Settings & Backup
+        </h5>
+
+        <div class="android-app-card mb-3">
+            <form onsubmit="saveSettings(event)">
+                <div class="mb-3">
+                    <label class="form-label small fw-bold">Shop Name <span class="text-danger">*</span></label>
+                    <input type="text" id="setShopName" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-bold">Tagline</label>
+                    <input type="text" id="setShopTagline" class="form-control">
+                </div>
+                <div class="row g-2 mb-3">
+                    <div class="col-6">
+                        <label class="form-label small fw-bold">Phone</label>
+                        <input type="text" id="setShopPhone" class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label small fw-bold">Currency</label>
+                        <input type="text" id="setCurrency" class="form-control" value="Rs.">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-bold">Shop Address</label>
+                    <input type="text" id="setShopAddress" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-bold">Receipt Footer Note</label>
+                    <textarea id="setFooterNote" rows="2" class="form-control"></textarea>
+                </div>
+                <button type="submit" class="btn btn-android-main w-100">Save Store Settings</button>
+            </form>
+        </div>
+
+        <div class="android-app-card border-start border-success border-4">
+            <h6 class="fw-bold text-dark mb-1"><i class="fa-solid fa-database text-success me-1"></i> Data Backup &
+                Restore</h6>
+            <p class="small text-muted mb-3">Download a safe backup copy of all Khata records and grocery bills.</p>
+            <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-success flex-fill rounded-3 py-2 fw-bold" onclick="exportDataBackup()">
+                    <i class="fa-solid fa-download me-1"></i> Download Backup
+                </button>
+                <label class="btn btn-sm btn-outline-dark flex-fill rounded-3 py-2 fw-bold mb-0 text-center">
+                    <i class="fa-solid fa-upload me-1"></i> Restore Backup
+                    <input type="file" id="restoreFileInput" accept=".json" style="display: none;"
+                        onchange="restoreDataBackup(event)">
+                </label>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= MODALS ================= -->
+
+    <!-- Modal: Add New Customer -->
+    <div class="modal fade" id="newCustomerModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0">
+                <form onsubmit="saveNewCustomer(event)">
+                    <div class="modal-header bg-success text-white">
+                        <h6 class="modal-title fw-bold"><i class="fa-solid fa-user-plus me-1"></i> New Customer (نیا
+                            گاہک)</h6>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-2">
+                            <label class="form-label small fw-bold">Full Name <span class="text-danger">*</span></label>
+                            <input type="text" id="custNameInput" class="form-control" placeholder="e.g. Muhammad Tariq"
+                                required>
+                        </div>
+                        <div class="row g-2 mb-2">
+                            <div class="col-6">
+                                <label class="form-label small fw-bold">Phone (WhatsApp)</label>
+                                <input type="text" id="custPhoneInput" class="form-control" placeholder="0300-1234567">
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label small fw-bold">Salary Day (تنخواہ دن)</label>
+                                <input type="number" id="custSalaryDayInput" min="1" max="31" class="form-control"
+                                    value="1" required>
+                            </div>
+                        </div>
+                        <div class="row g-2 mb-2">
+                            <div class="col-6">
+                                <label class="form-label small fw-bold">Credit Limit</label>
+                                <input type="number" id="custCreditLimitInput" class="form-control" value="15000">
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label small fw-bold">Opening Balance</label>
+                                <input type="number" id="custOpeningBalanceInput" class="form-control" value="0">
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label small fw-bold">Address (Newjatoi / Area)</label>
+                            <input type="text" id="custAddressInput" class="form-control"
+                                placeholder="e.g. Near Newjatoi Bazaar">
+                        </div>
+                        <div class="mb-1">
+                            <label class="form-label small fw-bold">Notes</label>
+                            <input type="text" id="custNotesInput" class="form-control"
+                                placeholder="e.g. Govt School Teacher">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-secondary rounded-pill"
+                            data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-sm btn-success rounded-pill px-4 fw-bold">Save
+                            Customer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Receive Payment -->
+    <div class="modal fade" id="receivePaymentModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0">
+                <form onsubmit="savePayment(event)">
+                    <div class="modal-header bg-primary text-white">
+                        <h6 class="modal-title fw-bold"><i class="fa-solid fa-hand-holding-dollar me-1"></i> Receive
+                            Payment (وصولی)</h6>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Select Customer <span
+                                    class="text-danger">*</span></label>
+                            <select id="payCustomerSelect" class="form-select" required
+                                onchange="onPaymentCustomerSelect()">
+                                <option value="">-- Choose Customer --</option>
+                            </select>
+                            <div id="payCustomerDuePreview" class="small mt-1 text-danger fw-bold"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Amount Received (رقم وصول ہوئی) <span
+                                    class="text-danger">*</span></label>
+                            <input type="number" step="0.01" min="1" id="payAmountInput"
+                                class="form-control form-control-lg fw-bold text-success" placeholder="e.g. 500"
+                                required>
+                        </div>
+                        <div class="row g-2 mb-2">
+                            <div class="col-6">
+                                <label class="form-label small fw-bold">Payment Date</label>
+                                <input type="date" id="payDateInput" class="form-control" required>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label small fw-bold">Payment Mode</label>
+                                <select id="payMethodSelect" class="form-select">
+                                    <option value="Cash">Cash (نقد)</option>
+                                    <option value="EasyPaisa/JazzCash">EasyPaisa / JazzCash</option>
+                                    <option value="Online Transfer">Online / Bank</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-secondary rounded-pill"
+                            data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-sm btn-primary rounded-pill px-4 fw-bold">Save
+                            Receipt</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Edit Bill -->
+    <div class="modal fade" id="editBillModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content rounded-4 border-0">
+                <form onsubmit="saveEditedBill(event)">
+                    <input type="hidden" id="editBillId">
+                    <div class="modal-header bg-dark text-white">
+                        <h6 class="modal-title fw-bold"><i class="fa-solid fa-pen-to-square me-1"></i> Edit Bill: <span
+                                id="editBillNumberTitle"></span></h6>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex justify-content-between mb-3 p-2 bg-light rounded">
+                            <div>Customer: <strong id="editBillCustomerName">-</strong></div>
+                            <div>Date: <input type="date" id="editBillDateInput"
+                                    class="form-control form-control-sm d-inline-block w-auto"></div>
+                        </div>
+
+                        <div id="editBillItemsContainer" class="mb-3"></div>
+                        <button type="button" class="btn btn-sm btn-outline-success rounded-pill mb-3"
+                            onclick="addEditBillItemRow()">+ Add Item</button>
+
+                        <div class="p-3 bg-light rounded">
+                            <div class="d-flex justify-content-between mb-1 small">
+                                <span>Subtotal:</span>
+                                <strong id="editBillSubtotalDisplay">Rs. 0.00</strong>
+                            </div>
+                            <div class="d-flex justify-content-between mb-1 align-items-center small">
+                                <span>Discount:</span>
+                                <input type="number" step="0.01" min="0" id="editBillDiscountInput"
+                                    class="form-control form-control-sm text-end w-50"
+                                    oninput="calculateEditBillTotals()">
+                            </div>
+                            <div class="d-flex justify-content-between mb-2 fs-6 fw-bold border-top pt-1">
+                                <span>Net Bill:</span>
+                                <span id="editBillNetDisplay">Rs. 0.00</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2 align-items-center">
+                                <span class="text-success fw-bold small">Paid Now:</span>
+                                <input type="number" step="0.01" min="0" id="editBillPaidNowInput"
+                                    class="form-control form-control-sm text-end w-50 text-success fw-bold"
+                                    oninput="calculateEditBillTotals()">
+                            </div>
+                            <div
+                                class="d-flex justify-content-between p-2 rounded bg-danger bg-opacity-10 text-danger fw-bold">
+                                <span>Due on this Bill:</span>
+                                <span id="editBillDueDisplay">Rs. 0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-secondary rounded-pill"
+                            data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-sm btn-primary rounded-pill px-4 fw-bold">Update
+                            Bill</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Android App Engine JavaScript -->
+    <script>
+        const STORAGE_KEY = 'SARFRAZ_STORE_DB_NEWJATOI';
+
+        // Preloaded Database with exact SARFRAZ Store Name & Scenario (600 bill - 500 paid = 100 due)
+        const defaultDatabase = {
+            settings: {
+                shop_name: "SARFRAZ General and Grossary Store Newjatoi",
+                shop_tagline: "Fresh Groceries & Monthly Salary Khata Service",
+                shop_phone: "+92 300 1234567",
+                shop_address: "Main Commercial Bazaar, Newjatoi, Sindh",
+                currency_symbol: "Rs.",
+                footer_note: "SARFRAZ General and Grossary Store Newjatoi. Please clear your dues on your monthly salary date."
+            },
+            customers: [
+                {
+                    id: 1,
+                    name: "Muhammad Tariq (Teacher)",
+                    phone: "0301-5551234",
+                    address: "Near High School, Newjatoi",
+                    salary_day: 5,
+                    credit_limit: 15000,
+                    opening_balance: 0,
+                    notes: "Salary on 5th of month. Buys grocery ration on credit."
+                },
+                {
+                    id: 2,
+                    name: "Sarfraz Ahmed (Govt Employee)",
+                    phone: "0333-8884321",
+                    address: "Main Road, Newjatoi",
+                    salary_day: 1,
+                    credit_limit: 25000,
+                    opening_balance: 0,
+                    notes: "Monthly khata. Clears dues on 1st."
+                },
+                {
+                    id: 3,
+                    name: "Rashid Ali (Police Officer)",
+                    phone: "0345-7779812",
+                    address: "Station Road, Newjatoi",
+                    salary_day: 10,
+                    credit_limit: 20000,
+                    opening_balance: 0,
+                    notes: "Salary on 10th of every month."
+                }
+            ],
+            products: [
+                { id: 1, name: "Refined White Sugar (1kg)", category: "Essentials", unit: "kg", price: 140, stock: 200 },
+                { id: 2, name: "Tetra Pak Fresh Milk (1 Litre)", category: "Dairy", unit: "litre", price: 260, stock: 90 },
+                { id: 3, name: "Iodized Table Salt (800g)", category: "Spices", unit: "packet", price: 60, stock: 120 },
+                { id: 4, name: "Super Basmati Rice (5kg Bag)", category: "Grains", unit: "bag", price: 1550, stock: 40 },
+                { id: 5, name: "Fine Wheat Flour / Atta (10kg)", category: "Flour", unit: "bag", price: 1350, stock: 50 },
+                { id: 6, name: "Pure Cooking Oil (1 Litre Pouch)", category: "Oils", unit: "litre", price: 480, stock: 80 },
+                { id: 7, name: "Premium Black Tea (450g Pack)", category: "Beverages", unit: "packet", price: 680, stock: 45 },
+                { id: 8, name: "Daal Chana Special (1kg)", category: "Grains", unit: "kg", price: 240, stock: 70 },
+                { id: 9, name: "Farm Fresh Eggs (1 Dozen)", category: "Dairy", unit: "dozen", price: 310, stock: 60 }
+            ],
+            bills: [
+                {
+                    id: 1,
+                    bill_number: "BILL-202611-0001",
+                    customer_id: 1,
+                    bill_date: new Date(Date.now() - 2 * 86400000).toISOString().split('T')[0],
+                    items: [
+                        { name: "Refined White Sugar (1kg)", unit: "kg", qty: 2, price: 140, total: 280 },
+                        { name: "Tetra Pak Fresh Milk (1 Litre)", unit: "litre", qty: 1, price: 260, total: 260 },
+                        { name: "Iodized Table Salt (800g)", unit: "packet", qty: 1, price: 60, total: 60 }
+                    ],
+                    subtotal: 600,
+                    discount: 0,
+                    net_amount: 600,
+                    paid_amount: 500, // Exact requirement: customer had 600 bill, paid 500
+                    due_amount: 100,  // exactly 100 remaining due in account!
+                    payment_method: "Cash",
+                    notes: "Customer paid Rs. 500, Rs. 100 will clear with salary."
+                }
+            ],
+            payments: [
+                {
+                    id: 1,
+                    payment_number: "REC-202611-0001",
+                    customer_id: 1,
+                    bill_id: 1,
+                    payment_date: new Date(Date.now() - 2 * 86400000).toISOString().split('T')[0],
+                    amount: 500,
+                    payment_method: "Cash",
+                    notes: "Paid at billing for Bill #BILL-202611-0001"
+                }
+            ]
+        };
+
+        let db = loadDatabase();
+
+        function loadDatabase() {
+            let raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) {
+                // Check previous storage key if user opened previous build
+                raw = localStorage.getItem('SARFRAN_STORE_DB_NEWJATOI');
+            }
+            if (raw) {
+                try {
+                    let parsed = JSON.parse(raw);
+                    if (parsed.settings) {
+                        if (parsed.settings.shop_name) {
+                            parsed.settings.shop_name = parsed.settings.shop_name.replace(/SARFRAN/gi, 'SARFRAZ');
+                        }
+                        if (parsed.settings.footer_note) {
+                            parsed.settings.footer_note = parsed.settings.footer_note.replace(/SARFRAN/gi, 'SARFRAZ');
+                        }
+                    }
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+                    return parsed;
+                } catch (e) { }
+            }
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultDatabase));
+            return JSON.parse(JSON.stringify(defaultDatabase));
+        }
+
+        function saveDatabase() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+            refreshAndroidUI();
+        }
+
+        let currentDetailCustId = null;
+        let currentViewBillId = null;
+        let currentCustFilter = 'all';
+
+        // Android Tab Navigation
+        function switchAndroidTab(tabKey) {
+            document.querySelectorAll('.app-tab-pane').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.android-nav-button').forEach(i => i.classList.remove('active'));
+
+            const targetPane = document.getElementById('pane-' + tabKey);
+            if (targetPane) targetPane.classList.add('active');
+
+            const navBtnMap = {
+                'home': 'btn-nav-home',
+                'customers': 'btn-nav-customers',
+                'customer-detail': 'btn-nav-customers',
+                'new-bill': null,
+                'bills': 'btn-nav-bills',
+                'bill-view': 'btn-nav-bills',
+                'salary': 'btn-nav-salary',
+                'settings': null
+            };
+
+            const btnId = navBtnMap[tabKey];
+            if (btnId && document.getElementById(btnId)) {
+                document.getElementById(btnId).classList.add('active');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            refreshAndroidUI();
+        }
+
+        // Customer Financials Calculator
+        function getCustomerFinancials(customerId) {
+            const cust = db.customers.find(c => c.id === customerId);
+            if (!cust) return { billed: 0, paid: 0, balance: 0, salaryStatus: 'cleared', salaryText: '' };
+
+            const totalBills = db.bills.filter(b => b.customer_id === customerId)
+                .reduce((sum, b) => sum + parseFloat(b.net_amount || 0), 0);
+            const totalBilled = totalBills + parseFloat(cust.opening_balance || 0);
+            const totalPaid = db.payments.filter(p => p.customer_id === customerId)
+                .reduce((sum, p) => sum + parseFloat(p.amount || 0), 0);
+            const balance = Math.round((totalBilled - totalPaid) * 100) / 100;
+
+            const todayDay = new Date().getDate();
+            const salDay = parseInt(cust.salary_day) || 1;
+
+            let salaryStatus = 'cleared';
+            let salaryText = 'All Cleared';
+
+            if (balance > 0) {
+                if (todayDay > salDay) {
+                    salaryStatus = 'overdue';
+                    salaryText = `Salary Day Passed (${salDay}th)`;
+                } else if (todayDay === salDay) {
+                    salaryStatus = 'due_today';
+                    salaryText = `Salary Due Today!`;
+                } else if (salDay - todayDay <= 5) {
+                    salaryStatus = 'due_soon';
+                    salaryText = `Salary in ${salDay - todayDay} days (${salDay}th)`;
+                } else {
+                    salaryStatus = 'upcoming';
+                    salaryText = `Salary on ${salDay}th`;
+                }
+            }
+
+            return { billed: totalBilled, paid: totalPaid, balance, salaryStatus, salaryText };
+        }
+
+        function showToast(msg) {
+            const c = document.getElementById('toastBox');
+            document.getElementById('toastMsg').textContent = msg;
+            c.style.display = 'block';
+            setTimeout(() => { c.style.display = 'none'; }, 3500);
+        }
+
+        // Refresh UI
+        function refreshAndroidUI() {
+            const cur = db.settings.currency_symbol || 'Rs.';
+            document.getElementById('appHeaderName').textContent = db.settings.shop_name;
+
+            renderHome();
+            renderCustomersList();
+            renderSalaryTab();
+            renderBillsList();
+            populateCustomerSelects();
+            populateQuickPicker();
+            renderSettings();
+        }
+
+        // 1. Home Dashboard
+        function renderHome() {
+            const cur = db.settings.currency_symbol || 'Rs.';
+            let totalDues = 0;
+            let duesCount = 0;
+            let overdueCount = 0;
+            const alertsList = [];
+
+            db.customers.forEach(c => {
+                const fin = getCustomerFinancials(c.id);
+                if (fin.balance > 0) {
+                    totalDues += fin.balance;
+                    duesCount++;
+                    if (fin.salaryStatus === 'overdue' || fin.salaryStatus === 'due_today') {
+                        overdueCount++;
+                        alertsList.push({ cust: c, fin });
+                    }
+                }
+            });
+
+            const totalSales = db.bills.reduce((s, b) => s + parseFloat(b.net_amount || 0), 0);
+            const totalPaid = db.payments.reduce((s, p) => s + parseFloat(p.amount || 0), 0);
+
+            document.getElementById('dashTotalDues').textContent = `${cur} ${totalDues.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+            document.getElementById('dashDuesCount').textContent = `${duesCount} customers owe money in Khata`;
+            document.getElementById('dashTotalSales').textContent = `${cur} ${totalSales.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+            document.getElementById('dashBillsCount').textContent = `${db.bills.length} bills`;
+            document.getElementById('dashTotalCollected').textContent = `${cur} ${totalPaid.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+            document.getElementById('dashPaymentsCount').textContent = `${db.payments.length} receipts`;
+            document.getElementById('homeAlertCount').textContent = alertsList.length;
+
+            // Salary alerts in home
+            const alertContainer = document.getElementById('homeSalaryAlertsContainer');
+            if (alertsList.length === 0) {
+                alertContainer.innerHTML = '<div class="small text-muted py-1">No pending salary overdue accounts today!</div>';
+            } else {
+                alertContainer.innerHTML = alertsList.slice(0, 3).map(a => `
+                    <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                        <div>
+                            <div class="fw-bold text-dark small">${a.cust.name}</div>
+                            <span class="status-chip ${a.fin.salaryStatus === 'due_today' ? 'chip-today' : 'chip-overdue'}">${a.fin.salaryText}</span>
+                        </div>
+                        <div class="text-end">
+                            <span class="fw-bold text-danger">${cur} ${a.fin.balance.toFixed(2)}</span><br>
+                            <button class="btn btn-sm btn-outline-primary py-0 px-2 mt-1" onclick="openCustomerDetail(${a.cust.id})">Khata</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Recent bills in home
+            const recentBills = [...db.bills].reverse().slice(0, 3);
+            const rContainer = document.getElementById('homeRecentBillsList');
+            if (recentBills.length === 0) {
+                rContainer.innerHTML = '<div class="text-muted small text-center py-3">No bills generated yet.</div>';
+            } else {
+                rContainer.innerHTML = recentBills.map(b => {
+                    const cust = db.customers.find(c => c.id === b.customer_id);
+                    return `
+                        <div class="android-app-card p-3 d-flex justify-content-between align-items-center" onclick="openBillView(${b.id})" style="cursor: pointer;">
+                            <div>
+                                <div class="fw-bold text-dark">${cust ? cust.name : 'Unknown'}</div>
+                                <small class="text-muted">${b.bill_number} • ${b.bill_date}</small>
+                            </div>
+                            <div class="text-end">
+                                <span class="fw-bold text-dark">${cur} ${parseFloat(b.net_amount).toFixed(2)}</span><br>
+                                ${parseFloat(b.due_amount) > 0 ? `<span class="badge bg-danger">Due: ${cur} ${b.due_amount}</span>` : `<span class="badge bg-success">Paid</span>`}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        // 2. Customers List
+        function setCustomerFilter(f) {
+            currentCustFilter = f;
+            document.querySelectorAll('#chipAll, #chipDues, #chipOverdue').forEach(b => b.className = 'btn btn-sm btn-outline-secondary rounded-pill px-3 py-1 flex-shrink-0');
+            if (f === 'all') document.getElementById('chipAll').className = 'btn btn-sm btn-dark rounded-pill px-3 py-1 flex-shrink-0';
+            if (f === 'dues') document.getElementById('chipDues').className = 'btn btn-sm btn-danger rounded-pill px-3 py-1 flex-shrink-0';
+            if (f === 'overdue') document.getElementById('chipOverdue').className = 'btn btn-sm btn-warning text-dark rounded-pill px-3 py-1 flex-shrink-0';
+            renderCustomersList();
+        }
+
+        function renderCustomersList() {
+            const cur = db.settings.currency_symbol || 'Rs.';
+            const search = (document.getElementById('custSearchInput') ? document.getElementById('custSearchInput').value : '').toLowerCase();
+            const container = document.getElementById('customersCardsContainer');
+
+            const filtered = db.customers.filter(c => {
+                const matchSearch = c.name.toLowerCase().includes(search) || (c.phone && c.phone.includes(search));
+                if (!matchSearch) return false;
+                const fin = getCustomerFinancials(c.id);
+                if (currentCustFilter === 'dues' && fin.balance <= 0) return false;
+                if (currentCustFilter === 'overdue' && fin.salaryStatus !== 'overdue') return false;
+                return true;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="text-center text-muted py-5">No customers found.</div>';
+                return;
+            }
+
+            container.innerHTML = filtered.map(c => {
+                const fin = getCustomerFinancials(c.id);
+                return `
+                    <div class="android-app-card p-3 mb-2" onclick="openCustomerDetail(${c.id})" style="cursor: pointer;">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h6 class="fw-bold text-dark mb-0">${c.name}</h6>
+                                <small class="text-muted"><i class="fa-solid fa-phone me-1"></i> ${c.phone || 'No phone'}</small>
+                            </div>
+                            <div class="text-end">
+                                ${fin.balance > 0 ? `<h5 class="fw-bold text-danger mb-0">${cur} ${fin.balance.toFixed(2)}</h5><small class="text-danger fw-semibold">Due</small>` : `<h6 class="fw-bold text-success mb-0">Cleared</h6>`}
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-2 pt-2 border-top">
+                            <span class="badge bg-light text-dark border">Salary: ${c.salary_day}th</span>
+                            <span class="status-chip ${fin.salaryStatus === 'overdue' ? 'chip-overdue' : (fin.salaryStatus === 'due_today' ? 'chip-today' : 'chip-cleared')}">
+                                ${fin.salaryText}
+                            </span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // 3. Customer Detail Screen
+        function openCustomerDetail(custId) {
+            currentDetailCustId = custId;
+            const cust = db.customers.find(c => c.id === custId);
+            if (!cust) return;
+
+            const cur = db.settings.currency_symbol || 'Rs.';
+            const fin = getCustomerFinancials(custId);
+
+            document.getElementById('detailCustName').textContent = cust.name;
+            document.getElementById('detailCustPhone').textContent = cust.phone ? `Phone: ${cust.phone}` : 'No phone';
+            document.getElementById('detailCustAddress').textContent = cust.address ? `Address: ${cust.address}` : 'Newjatoi, Sindh';
+            document.getElementById('detailNetBalance').textContent = `${cur} ${fin.balance.toFixed(2)}`;
+            document.getElementById('detailSalaryDay').textContent = `Salary Day: ${cust.salary_day}th of Month`;
+
+            const badge = document.getElementById('detailSalaryBadge');
+            badge.className = `status-chip ${fin.salaryStatus === 'overdue' ? 'chip-overdue' : (fin.salaryStatus === 'due_today' ? 'chip-today' : 'chip-cleared')}`;
+            badge.textContent = fin.salaryText;
+
+            // WhatsApp Share
+            let cleanPhone = (cust.phone || '').replace(/[^0-9]/g, '');
+            if (cleanPhone.startsWith('0')) cleanPhone = '92' + cleanPhone.slice(1);
+            const waMsg = `Assalam-o-Alaikum ${cust.name},\nThis is a Khata summary from *${db.settings.shop_name}*.\nTotal Purchases: ${cur} ${fin.billed.toFixed(2)}\nTotal Paid: ${cur} ${fin.paid.toFixed(2)}\n*Current Due Balance: ${cur} ${fin.balance.toFixed(2)}*\nScheduled Salary Date: ${cust.salary_day}th of month.\nKindly clear your dues at your earliest convenience. Thank you!`;
+            const waBtn = document.getElementById('detailWhatsAppBtn');
+            if (cleanPhone) {
+                waBtn.href = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(waMsg)}`;
+                waBtn.style.display = 'inline-block';
+            } else {
+                waBtn.style.display = 'none';
+            }
+
+            // Ledger
+            const entries = [];
+            if (cust.opening_balance > 0) {
+                entries.push({ date: 'Initial', ref: 'OPENING', desc: 'Opening Balance', debit: cust.opening_balance, credit: 0 });
+            }
+            db.bills.filter(b => b.customer_id === custId).forEach(b => {
+                entries.push({ date: b.bill_date, ref: b.bill_number, desc: `Purchase (Bill #${b.bill_number})`, debit: b.net_amount, credit: 0, billId: b.id });
+            });
+            db.payments.filter(p => p.customer_id === custId).forEach(p => {
+                entries.push({ date: p.payment_date, ref: p.payment_number, desc: `Cash Received (${p.payment_method})`, debit: 0, credit: p.amount });
+            });
+
+            entries.sort((a, b) => a.date.localeCompare(b.date));
+            let running = 0;
+            const tbody = document.getElementById('detailLedgerBody');
+            if (entries.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted py-3">No transactions recorded.</td></tr>';
+            } else {
+                tbody.innerHTML = entries.map(e => {
+                    running += (e.debit - e.credit);
+                    return `
+                        <tr class="${e.credit > 0 ? 'table-success bg-opacity-25' : ''}">
+                            <td class="small fw-semibold">${e.date}<br><small class="text-muted">${e.ref}</small></td>
+                            <td class="small">${e.desc}</td>
+                            <td class="text-end text-danger fw-bold small">${e.debit > 0 ? cur + ' ' + e.debit.toFixed(2) : '-'}</td>
+                            <td class="text-end text-success fw-bold small">${e.credit > 0 ? cur + ' ' + e.credit.toFixed(2) : '-'}</td>
+                            <td class="text-end fw-bold small ${running > 0 ? 'text-danger' : 'text-success'}">${cur} ${running.toFixed(2)}</td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            switchAndroidTab('customer-detail');
+        }
+
+        // 4. POS Billing (Handles 600 bill, 500 paid, 100 due)
+        function openNewBillForCustomer(custId) {
+            switchAndroidTab('new-bill');
+            const select = document.getElementById('billCustomerSelect');
+            if (select) {
+                select.value = custId;
+                onBillCustomerChange();
+            }
+        }
+
+        function populateCustomerSelects() {
+            const billSelect = document.getElementById('billCustomerSelect');
+            const paySelect = document.getElementById('payCustomerSelect');
+            const cur = db.settings.currency_symbol || 'Rs.';
+
+            const opts = '<option value="">-- Select Customer --</option>' + db.customers.map(c => {
+                const fin = getCustomerFinancials(c.id);
+                return `<option value="${c.id}">${c.name} (Due: ${cur} ${fin.balance.toFixed(2)} | Salary: ${c.salary_day}th)</option>`;
+            }).join('');
+
+            if (billSelect) billSelect.innerHTML = opts;
+            if (paySelect) paySelect.innerHTML = opts;
+        }
+
+        function populateQuickPicker() {
+            const picker = document.getElementById('quickProductPicker');
+            if (!picker) return;
+            picker.innerHTML = '<option value="">-- Choose item from catalog --</option>' + db.products.map(p => {
+                return `<option value="${p.id}" data-name="${p.name}" data-unit="${p.unit}" data-price="${p.price}">${p.name} — ${db.settings.currency_symbol || 'Rs.'} ${p.price} / ${p.unit}</option>`;
+            }).join('');
+        }
+
+        function onBillCustomerChange() {
+            const custId = parseInt(document.getElementById('billCustomerSelect').value);
+            const badge = document.getElementById('billCustomerBadge');
+            if (!custId) {
+                badge.innerHTML = '';
+                calculateBillTotals();
+                return;
+            }
+            const cust = db.customers.find(c => c.id === custId);
+            const fin = getCustomerFinancials(custId);
+            badge.innerHTML = `<span class="badge bg-secondary">Salary: ${cust.salary_day}th</span> <span class="badge ${fin.balance > 0 ? 'bg-danger' : 'bg-success'}">Current Dues: ${db.settings.currency_symbol || 'Rs.'} ${fin.balance.toFixed(2)}</span>`;
+            calculateBillTotals();
+        }
+
+        function addBillItemRow(name = '', unit = 'kg', qty = 1, price = 0) {
+            const container = document.getElementById('billItemsContainer');
+            const div = document.createElement('div');
+            div.className = 'bill-item-row p-2 bg-light rounded-3 mb-2 border';
+            div.innerHTML = `
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                    <input type="text" class="form-control form-control-sm item-name fw-bold me-2" value="${name}" placeholder="Item Name (e.g. Sugar)" required>
+                    <button type="button" class="btn btn-sm text-danger p-0 ms-1" onclick="this.closest('.bill-item-row').remove(); calculateBillTotals();"><i class="fa-solid fa-trash"></i></button>
+                </div>
+                <div class="row g-2 align-items-center">
+                    <div class="col-4">
+                        <label class="small text-muted" style="font-size:0.7rem;">Qty</label>
+                        <input type="number" step="0.01" min="0.01" class="form-control form-control-sm text-center item-qty" value="${qty}" oninput="calculateBillTotals()" required>
+                    </div>
+                    <div class="col-4">
+                        <label class="small text-muted" style="font-size:0.7rem;">Price</label>
+                        <input type="number" step="0.01" min="0" class="form-control form-control-sm text-end item-price" value="${price}" oninput="calculateBillTotals()" required>
+                    </div>
+                    <div class="col-4">
+                        <label class="small text-muted" style="font-size:0.7rem;">Line Total</label>
+                        <input type="text" class="form-control form-control-sm text-end fw-bold bg-white item-total" value="${(qty * price).toFixed(2)}" readonly>
+                    </div>
+                </div>
+            `;
+            container.appendChild(div);
+            calculateBillTotals();
+        }
+
+        function quickAddProductToBill() {
+            const picker = document.getElementById('quickProductPicker');
+            const opt = picker.options[picker.selectedIndex];
+            if (!opt.value) return;
+            addBillItemRow(opt.getAttribute('data-name'), opt.getAttribute('data-unit'), 1, parseFloat(opt.getAttribute('data-price') || 0));
+            picker.selectedIndex = 0;
+        }
+
+        function setQuickPayment(type) {
+            let subtotal = 0;
+            document.querySelectorAll('#billItemsContainer .bill-item-row').forEach(row => {
+                const qty = parseFloat(row.querySelector('.item-qty').value) || 0;
+                const price = parseFloat(row.querySelector('.item-price').value) || 0;
+                subtotal += (qty * price);
+            });
+            const discount = parseFloat(document.getElementById('billDiscountInput').value) || 0;
+            const net = Math.max(0, subtotal - discount);
+
+            if (type === 'zero') {
+                document.getElementById('billPaidNowInput').value = 0;
+            } else if (type === 'exact') {
+                document.getElementById('billPaidNowInput').value = net;
+            }
+            calculateBillTotals();
+        }
+
+        function calculateChangeReturn() {
+            const cur = db.settings.currency_symbol || 'Rs.';
+            const tendered = parseFloat(document.getElementById('cashTenderedInput').value) || 0;
+            const paidNow = parseFloat(document.getElementById('billPaidNowInput').value) || 0;
+            const change = Math.max(0, tendered - paidNow);
+            document.getElementById('changeReturnDisplay').textContent = `${cur} ${change.toFixed(2)}`;
+        }
+
+        function calculateBillTotals() {
+            const cur = db.settings.currency_symbol || 'Rs.';
+            let subtotal = 0;
+            document.querySelectorAll('#billItemsContainer .bill-item-row').forEach(row => {
+                const qty = parseFloat(row.querySelector('.item-qty').value) || 0;
+                const price = parseFloat(row.querySelector('.item-price').value) || 0;
+                const lineTotal = Math.round(qty * price * 100) / 100;
+                row.querySelector('.item-total').value = lineTotal.toFixed(2);
+                subtotal += lineTotal;
+            });
+
+            const discount = parseFloat(document.getElementById('billDiscountInput').value) || 0;
+            const net = Math.max(0, subtotal - discount);
+            const paid = parseFloat(document.getElementById('billPaidNowInput').value) || 0;
+            const due = Math.max(0, net - paid);
+
+            document.getElementById('billSubtotalDisplay').textContent = `${cur} ${subtotal.toFixed(2)}`;
+            document.getElementById('billNetDisplay').textContent = `${cur} ${net.toFixed(2)}`;
+            document.getElementById('billDueDisplay').textContent = `${cur} ${due.toFixed(2)}`;
+
+            const custId = parseInt(document.getElementById('billCustomerSelect').value);
+            let prevDue = 0;
+            if (custId) {
+                prevDue = getCustomerFinancials(custId).balance;
+            }
+            document.getElementById('billNewCustomerBalanceDisplay').textContent = `${cur} ${(prevDue + due).toFixed(2)}`;
+            calculateChangeReturn();
+        }
+
+        function saveNewBill(e) {
+            e.preventDefault();
+            const customerId = parseInt(document.getElementById('billCustomerSelect').value);
+            if (!customerId) return alert('Please select a customer!');
+
+            const discount = parseFloat(document.getElementById('billDiscountInput').value) || 0;
+            const paidNow = parseFloat(document.getElementById('billPaidNowInput').value) || 0;
+            const items = [];
+            let subtotal = 0;
+
+            document.querySelectorAll('#billItemsContainer .bill-item-row').forEach(row => {
+                const name = row.querySelector('.item-name').value.trim();
+                const qty = parseFloat(row.querySelector('.item-qty').value) || 1;
+                const price = parseFloat(row.querySelector('.item-price').value) || 0;
+                const total = Math.round(qty * price * 100) / 100;
+                if (name) {
+                    items.push({ name, unit: 'pcs', qty, price, total });
+                    subtotal += total;
+                }
+            });
+
+            if (items.length === 0) return alert('Please add at least one item to the bill!');
+
+            const netAmount = Math.max(0, subtotal - discount);
+            const dueAmount = Math.max(0, netAmount - paidNow);
+            const billDate = new Date().toISOString().split('T')[0];
+            const newId = (db.bills.length > 0 ? Math.max(...db.bills.map(b => b.id)) : 0) + 1;
+            const billNumber = `BILL-${new Date().getFullYear()}${String(new Date().getMonth() + 1).padStart(2, '0')}-${String(newId).padStart(4, '0')}`;
+
+            db.bills.push({
+                id: newId,
+                bill_number: billNumber,
+                customer_id: customerId,
+                bill_date: billDate,
+                items,
+                subtotal,
+                discount,
+                net_amount: netAmount,
+                paid_amount: paidNow,
+                due_amount: dueAmount,
+                payment_method: 'Cash'
+            });
+
+            if (paidNow > 0) {
+                const newPayId = (db.payments.length > 0 ? Math.max(...db.payments.map(p => p.id)) : 0) + 1;
+                db.payments.push({
+                    id: newPayId,
+                    payment_number: `REC-${String(newPayId).padStart(4, '0')}`,
+                    customer_id: customerId,
+                    bill_id: newId,
+                    payment_date: billDate,
+                    amount: paidNow,
+                    payment_method: 'Cash',
+                    notes: `Paid at counter for Bill #${billNumber}`
+                });
+            }
+
+            saveDatabase();
+            showToast('Bill created successfully!');
+            openBillView(newId);
+        }
+
+        // 5. Bill View & Print
+        function openBillView(billId) {
+            currentViewBillId = billId;
+            const bill = db.bills.find(b => b.id === billId);
+            if (!bill) return;
+
+            const cust = db.customers.find(c => c.id === bill.customer_id);
+            const cur = db.settings.currency_symbol || 'Rs.';
+            const fin = getCustomerFinancials(bill.customer_id);
+
+            document.getElementById('receiptShopName').textContent = db.settings.shop_name;
+            document.getElementById('receiptShopTagline').textContent = db.settings.shop_tagline;
+            document.getElementById('receiptShopContact').textContent = `${db.settings.shop_address} • Phone: ${db.settings.shop_phone}`;
+            document.getElementById('receiptBillNo').textContent = bill.bill_number;
+            document.getElementById('receiptBillDate').textContent = bill.bill_date;
+            document.getElementById('receiptCustomerName').textContent = cust ? cust.name : 'Unknown';
+            document.getElementById('receiptSalaryDay').textContent = cust ? `Salary: ${cust.salary_day}th` : '';
+
+            document.getElementById('receiptItemsBody').innerHTML = bill.items.map(it => `
+                <tr>
+                    <td class="fw-semibold">${it.name}</td>
+                    <td class="text-center">${it.qty}</td>
+                    <td class="text-end">${cur} ${parseFloat(it.price).toFixed(2)}</td>
+                    <td class="text-end fw-bold">${cur} ${parseFloat(it.total).toFixed(2)}</td>
+                </tr>
+            `).join('');
+
+            document.getElementById('receiptSubtotal').textContent = `${cur} ${parseFloat(bill.subtotal).toFixed(2)}`;
+            document.getElementById('receiptDiscount').textContent = `${cur} ${parseFloat(bill.discount).toFixed(2)}`;
+            document.getElementById('receiptNetAmount').textContent = `${cur} ${parseFloat(bill.net_amount).toFixed(2)}`;
+            document.getElementById('receiptPaidNow').textContent = `${cur} ${parseFloat(bill.paid_amount).toFixed(2)}`;
+            document.getElementById('receiptDueNow').textContent = `${cur} ${parseFloat(bill.due_amount).toFixed(2)}`;
+            document.getElementById('receiptTotalCustomerDue').textContent = `Customer Total Outstanding Khata Balance: ${cur} ${fin.balance.toFixed(2)}`;
+            document.getElementById('receiptFooterMsg').textContent = db.settings.footer_note;
+
+            // WhatsApp Share
+            let cleanPhone = cust ? (cust.phone || '').replace(/[^0-9]/g, '') : '';
+            if (cleanPhone.startsWith('0')) cleanPhone = '92' + cleanPhone.slice(1);
+            const itemsSummary = bill.items.map(it => `- ${it.name}: ${it.qty} x ${it.price} = ${cur} ${it.total}`).join('\n');
+            const waMsg = `*${db.settings.shop_name}*\nBill No: *${bill.bill_number}*\nCustomer: ${cust ? cust.name : ''}\n\n${itemsSummary}\n\n*Net Total: ${cur} ${bill.net_amount}*\nPaid Now: ${cur} ${bill.paid_amount}\n*Due on this Bill: ${cur} ${bill.due_amount}*\nTotal Customer Due Balance: ${cur} ${fin.balance.toFixed(2)}\nSalary Date: ${cust ? cust.salary_day : ''}th\nThank you!`;
+            const waBtn = document.getElementById('viewBillWhatsAppBtn');
+            if (cleanPhone) {
+                waBtn.href = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(waMsg)}`;
+                waBtn.style.display = 'inline-block';
+            } else {
+                waBtn.style.display = 'none';
+            }
+
+            switchAndroidTab('bill-view');
+        }
+
+        // 6. Bills Register
+        function renderBillsList() {
+            const cur = db.settings.currency_symbol || 'Rs.';
+            const container = document.getElementById('billsCardsContainer');
+            if (db.bills.length === 0) {
+                container.innerHTML = '<div class="text-muted text-center py-5">No bills found.</div>';
+                return;
+            }
+
+            container.innerHTML = [...db.bills].reverse().map(b => {
+                const cust = db.customers.find(c => c.id === b.customer_id);
+                return `
+                    <div class="android-app-card p-3 mb-2">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h6 class="fw-bold text-dark mb-0">${cust ? cust.name : 'Unknown'}</h6>
+                                <small class="text-muted">${b.bill_number} • ${b.bill_date}</small>
+                            </div>
+                            <div class="text-end">
+                                <h5 class="fw-bold text-dark mb-0">${cur} ${parseFloat(b.net_amount).toFixed(2)}</h5>
+                                ${parseFloat(b.due_amount) > 0 ? `<span class="badge bg-danger">Due: ${cur} ${b.due_amount}</span>` : `<span class="badge bg-success">Paid</span>`}
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-2 pt-2 border-top">
+                            <span class="small text-muted">Paid Now: ${cur} ${b.paid_amount}</span>
+                            <div class="d-flex gap-1">
+                                <button class="btn btn-sm btn-light border" onclick="openBillView(${b.id})"><i class="fa-solid fa-print"></i></button>
+                                <button class="btn btn-sm btn-light border text-primary" onclick="openEditBillModal(${b.id})"><i class="fa-solid fa-pen-to-square"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // 7. Salary Tracker Screen
+        function renderSalaryTab() {
+            const cur = db.settings.currency_symbol || 'Rs.';
+            const overdue = [];
+            const upcoming = [];
+            let totalOverdue = 0;
+            let totalToday = 0;
+
+            db.customers.forEach(c => {
+                const fin = getCustomerFinancials(c.id);
+                if (fin.balance > 0) {
+                    if (fin.salaryStatus === 'overdue') {
+                        overdue.push({ cust: c, fin });
+                        totalOverdue += fin.balance;
+                    } else {
+                        upcoming.push({ cust: c, fin });
+                        if (fin.salaryStatus === 'due_today') totalToday += fin.balance;
+                    }
+                }
+            });
+
+            document.getElementById('salaryOverdueTotal').textContent = `${cur} ${totalOverdue.toFixed(2)}`;
+            document.getElementById('salaryOverdueCount').textContent = `${overdue.length} clients`;
+            document.getElementById('salaryTodayTotal').textContent = `${cur} ${totalToday.toFixed(2)}`;
+            document.getElementById('salaryTodayCount').textContent = `${upcoming.filter(u => u.fin.salaryStatus === 'due_today').length} clients`;
+
+            const oList = document.getElementById('salaryOverdueList');
+            if (overdue.length === 0) {
+                oList.innerHTML = '<div class="small text-muted py-2 text-center">No overdue accounts!</div>';
+            } else {
+                oList.innerHTML = overdue.map(item => `
+                    <div class="android-app-card p-3 mb-2 border-start border-danger border-4">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6 class="fw-bold text-dark mb-0">${item.cust.name}</h6>
+                                <small class="text-danger fw-semibold"><i class="fa-solid fa-clock me-1"></i> Salary day was on ${item.cust.salary_day}th</small>
+                            </div>
+                            <div class="text-end">
+                                <h5 class="fw-bold text-danger mb-0">${cur} ${item.fin.balance.toFixed(2)}</h5>
+                                <button class="btn btn-sm btn-outline-primary py-0 px-2 mt-1" onclick="openCustomerDetail(${item.cust.id})">Khata</button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            const uList = document.getElementById('salaryUpcomingList');
+            if (upcoming.length === 0) {
+                uList.innerHTML = '<div class="small text-muted py-2 text-center">No upcoming accounts.</div>';
+            } else {
+                uList.innerHTML = upcoming.map(item => `
+                    <div class="android-app-card p-3 mb-2">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6 class="fw-bold text-dark mb-0">${item.cust.name}</h6>
+                                <small class="text-muted">Salary Day: ${item.cust.salary_day}th of month</small>
+                            </div>
+                            <div class="text-end">
+                                <h6 class="fw-bold text-danger mb-0">${cur} ${item.fin.balance.toFixed(2)}</h6>
+                                <button class="btn btn-sm btn-outline-primary py-0 px-2 mt-1" onclick="openCustomerDetail(${item.cust.id})">Khata</button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // 8. Edit Bill Modal
+        function openEditBillModal(billId) {
+            const bill = db.bills.find(b => b.id === billId);
+            if (!bill) return;
+
+            const cust = db.customers.find(c => c.id === bill.customer_id);
+            document.getElementById('editBillId').value = bill.id;
+            document.getElementById('editBillNumberTitle').textContent = bill.bill_number;
+            document.getElementById('editBillCustomerName').textContent = cust ? cust.name : 'Unknown';
+            document.getElementById('editBillDateInput').value = bill.bill_date;
+            document.getElementById('editBillDiscountInput').value = bill.discount;
+            document.getElementById('editBillPaidNowInput').value = bill.paid_amount;
+
+            const container = document.getElementById('editBillItemsContainer');
+            container.innerHTML = '';
+            bill.items.forEach(it => {
+                addEditBillItemRow(it.name, it.unit, it.qty, it.price);
+            });
+
+            calculateEditBillTotals();
+            new bootstrap.Modal(document.getElementById('editBillModal')).show();
+        }
+
+        function addEditBillItemRow(name = '', unit = 'pcs', qty = 1, price = 0) {
+            const container = document.getElementById('editBillItemsContainer');
+            const div = document.createElement('div');
+            div.className = 'edit-bill-item-row p-2 bg-light rounded-3 mb-2 border';
+            div.innerHTML = `
+                <div class="d-flex justify-content-between mb-1">
+                    <input type="text" class="form-control form-control-sm item-name fw-bold me-2" value="${name}" required>
+                    <button type="button" class="btn btn-sm text-danger p-0" onclick="this.closest('.edit-bill-item-row').remove(); calculateEditBillTotals();"><i class="fa-solid fa-trash"></i></button>
+                </div>
+                <div class="row g-2">
+                    <div class="col-6">
+                        <label class="small text-muted" style="font-size:0.7rem;">Qty</label>
+                        <input type="number" step="0.01" min="0.01" class="form-control form-control-sm text-center item-qty" value="${qty}" oninput="calculateEditBillTotals()" required>
+                    </div>
+                    <div class="col-6">
+                        <label class="small text-muted" style="font-size:0.7rem;">Price</label>
+                        <input type="number" step="0.01" min="0" class="form-control form-control-sm text-end item-price" value="${price}" oninput="calculateEditBillTotals()" required>
+                    </div>
+                </div>
+            `;
+            container.appendChild(div);
+            calculateEditBillTotals();
+        }
+
+        function calculateEditBillTotals() {
+            let subtotal = 0;
+            document.querySelectorAll('#editBillItemsContainer .edit-bill-item-row').forEach(row => {
+                const qty = parseFloat(row.querySelector('.item-qty').value) || 0;
+                const price = parseFloat(row.querySelector('.item-price').value) || 0;
+                subtotal += (qty * price);
+            });
+
+            const discount = parseFloat(document.getElementById('editBillDiscountInput').value) || 0;
+            const net = Math.max(0, subtotal - discount);
+            const paid = parseFloat(document.getElementById('editBillPaidNowInput').value) || 0;
+            const due = Math.max(0, net - paid);
+
+            document.getElementById('editBillSubtotalDisplay').textContent = `Rs. ${subtotal.toFixed(2)}`;
+            document.getElementById('editBillNetDisplay').textContent = `Rs. ${net.toFixed(2)}`;
+            document.getElementById('editBillDueDisplay').textContent = `Rs. ${due.toFixed(2)}`;
+        }
+
+        function saveEditedBill(e) {
+            e.preventDefault();
+            const billId = parseInt(document.getElementById('editBillId').value);
+            const bill = db.bills.find(b => b.id === billId);
+            if (!bill) return;
+
+            const items = [];
+            let subtotal = 0;
+            document.querySelectorAll('#editBillItemsContainer .edit-bill-item-row').forEach(row => {
+                const name = row.querySelector('.item-name').value.trim();
+                const qty = parseFloat(row.querySelector('.item-qty').value) || 1;
+                const price = parseFloat(row.querySelector('.item-price').value) || 0;
+                const total = Math.round(qty * price * 100) / 100;
+                if (name) {
+                    items.push({ name, unit: 'pcs', qty, price, total });
+                    subtotal += total;
+                }
+            });
+
+            if (items.length === 0) return alert('Bill must have at least one item!');
+
+            const discount = parseFloat(document.getElementById('editBillDiscountInput').value) || 0;
+            const net = Math.max(0, subtotal - discount);
+            const paidNow = parseFloat(document.getElementById('editBillPaidNowInput').value) || 0;
+            const due = Math.max(0, net - paidNow);
+            const date = document.getElementById('editBillDateInput').value;
+
+            bill.bill_date = date;
+            bill.items = items;
+            bill.subtotal = subtotal;
+            bill.discount = discount;
+            bill.net_amount = net;
+            bill.paid_amount = paidNow;
+            bill.due_amount = due;
+
+            // Update linked payment
+            const payIdx = db.payments.findIndex(p => p.bill_id === billId);
+            if (paidNow > 0) {
+                if (payIdx !== -1) {
+                    db.payments[payIdx].amount = paidNow;
+                    db.payments[payIdx].payment_date = date;
+                } else {
+                    const newPayId = (db.payments.length > 0 ? Math.max(...db.payments.map(p => p.id)) : 0) + 1;
+                    db.payments.push({
+                        id: newPayId,
+                        payment_number: `REC-${String(newPayId).padStart(4, '0')}`,
+                        customer_id: bill.customer_id,
+                        bill_id: billId,
+                        payment_date: date,
+                        amount: paidNow,
+                        payment_method: 'Cash',
+                        notes: `Paid at billing for Bill #${bill.bill_number}`
+                    });
+                }
+            } else if (payIdx !== -1) {
+                db.payments.splice(payIdx, 1);
+            }
+
+            saveDatabase();
+            bootstrap.Modal.getInstance(document.getElementById('editBillModal')).hide();
+            showToast('Bill updated & dues recalculated!');
+            openBillView(billId);
+        }
+
+        // 9. Payment Modal & Save
+        function openReceivePaymentModal(custId = null) {
+            populateCustomerSelects();
+            const modal = new bootstrap.Modal(document.getElementById('receivePaymentModal'));
+            document.getElementById('payDateInput').value = new Date().toISOString().split('T')[0];
+            if (custId) {
+                document.getElementById('payCustomerSelect').value = custId;
+                onPaymentCustomerSelect();
+            } else {
+                document.getElementById('payAmountInput').value = '';
+                document.getElementById('payCustomerDuePreview').textContent = '';
+            }
+            modal.show();
+        }
+
+        function onPaymentCustomerSelect() {
+            const custId = parseInt(document.getElementById('payCustomerSelect').value);
+            const preview = document.getElementById('payCustomerDuePreview');
+            if (custId) {
+                const fin = getCustomerFinancials(custId);
+                preview.textContent = `Current Outstanding Dues: ${db.settings.currency_symbol || 'Rs.'} ${fin.balance.toFixed(2)}`;
+                document.getElementById('payAmountInput').value = fin.balance > 0 ? fin.balance : '';
+            } else {
+                preview.textContent = '';
+            }
+        }
+
+        function savePayment(e) {
+            e.preventDefault();
+            const customerId = parseInt(document.getElementById('payCustomerSelect').value);
+            const amount = parseFloat(document.getElementById('payAmountInput').value) || 0;
+            const payDate = document.getElementById('payDateInput').value || new Date().toISOString().split('T')[0];
+            const method = document.getElementById('payMethodSelect').value || 'Cash';
+
+            if (!customerId || amount <= 0) return alert('Please enter valid customer and amount!');
+
+            const newId = (db.payments.length > 0 ? Math.max(...db.payments.map(p => p.id)) : 0) + 1;
+            db.payments.push({
+                id: newId,
+                payment_number: `REC-${new Date().getFullYear()}${String(new Date().getMonth() + 1).padStart(2, '0')}-${String(newId).padStart(4, '0')}`,
+                customer_id: customerId,
+                bill_id: null,
+                payment_date: payDate,
+                amount: amount,
+                payment_method: method,
+                notes: 'Salary account payment'
+            });
+
+            saveDatabase();
+            bootstrap.Modal.getInstance(document.getElementById('receivePaymentModal')).hide();
+            showToast('Payment received and Khata updated!');
+            openCustomerDetail(customerId);
+        }
+
+        // 10. Add Customer Modal
+        function openNewCustomerModal() {
+            new bootstrap.Modal(document.getElementById('newCustomerModal')).show();
+        }
+
+        function saveNewCustomer(e) {
+            e.preventDefault();
+            const name = document.getElementById('custNameInput').value.trim();
+            const phone = document.getElementById('custPhoneInput').value.trim();
+            const salary_day = parseInt(document.getElementById('custSalaryDayInput').value) || 1;
+            const credit_limit = parseFloat(document.getElementById('custCreditLimitInput').value) || 0;
+            const opening_balance = parseFloat(document.getElementById('custOpeningBalanceInput').value) || 0;
+            const address = document.getElementById('custAddressInput').value.trim();
+            const notes = document.getElementById('custNotesInput').value.trim();
+
+            if (!name) return alert('Customer name is required!');
+
+            const newId = (db.customers.length > 0 ? Math.max(...db.customers.map(c => c.id)) : 0) + 1;
+            db.customers.push({ id: newId, name, phone, salary_day, credit_limit, opening_balance, address, notes });
+            saveDatabase();
+            bootstrap.Modal.getInstance(document.getElementById('newCustomerModal')).hide();
+            showToast('Customer added successfully!');
+            openCustomerDetail(newId);
+        }
+
+        // 11. Settings & Data Backup
+        function renderSettings() {
+            document.getElementById('setShopName').value = db.settings.shop_name;
+            document.getElementById('setShopTagline').value = db.settings.shop_tagline;
+            document.getElementById('setShopPhone').value = db.settings.shop_phone;
+            document.getElementById('setCurrency').value = db.settings.currency_symbol || 'Rs.';
+            document.getElementById('setShopAddress').value = db.settings.shop_address;
+            document.getElementById('setFooterNote').value = db.settings.footer_note;
+        }
+
+        function saveSettings(e) {
+            e.preventDefault();
+            db.settings.shop_name = document.getElementById('setShopName').value.trim();
+            db.settings.shop_tagline = document.getElementById('setShopTagline').value.trim();
+            db.settings.shop_phone = document.getElementById('setShopPhone').value.trim();
+            db.settings.currency_symbol = document.getElementById('setCurrency').value.trim() || 'Rs.';
+            db.settings.shop_address = document.getElementById('setShopAddress').value.trim();
+            db.settings.footer_note = document.getElementById('setFooterNote').value.trim();
+            saveDatabase();
+            showToast('Shop details saved!');
+        }
+
+        function exportDataBackup() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(db, null, 2));
+            const dl = document.createElement('a');
+            dl.setAttribute("href", dataStr);
+            dl.setAttribute("download", `SARFRAZ_Store_Khata_${new Date().toISOString().split('T')[0]}.json`);
+            dl.click();
+        }
+
+        function restoreDataBackup(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function (evt) {
+                try {
+                    const parsed = JSON.parse(evt.target.result);
+                    if (parsed.customers && parsed.bills) {
+                        db = parsed;
+                        saveDatabase();
+                        alert('Backup restored successfully!');
+                    }
+                } catch (err) {
+                    alert('Invalid backup file!');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function exportDuesToCSV() {
+            let csv = "Customer ID,Name,Phone,Address,Salary Day,Total Billed,Total Paid,Current Due,Status\n";
+            db.customers.forEach(c => {
+                const fin = getCustomerFinancials(c.id);
+                if (fin.balance > 0) {
+                    csv += `"${c.id}","${c.name}","${c.phone || ''}","${c.address || ''}","${c.salary_day}","${fin.billed}","${fin.paid}","${fin.balance}","${fin.salaryText}"\n`;
+                }
+            });
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            a.setAttribute('download', `SARFRAZ_Salary_Dues_${new Date().toISOString().split('T')[0]}.csv`);
+            a.click();
+        }
+
+        // App Initializer
+        window.addEventListener('DOMContentLoaded', () => {
+            addBillItemRow("Refined White Sugar (1kg)", "kg", 2, 140);
+            refreshAndroidUI();
+        });
+    </script>
+</body>
+
+</html>
