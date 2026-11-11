@@ -7,8 +7,8 @@
     <meta name="theme-color" content="#0d5c3a">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="description" content="SARFRAZ General and Grossary Store Newjatoi - Mobile Customer MIS & Billing App">
-    <title>SARFRAZ General and Grossary Store Newjatoi</title>
+    <meta name="description" content="Indus General and Grossary Store Newjatoi - Mobile Customer MIS & Billing App">
+    <title>Indus General and Grossary Store Newjatoi</title>
 
     <!-- Google Fonts (Roboto) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -332,7 +332,7 @@
                     <i class="fa-solid fa-store"></i>
                 </div>
                 <div>
-                    <h5 class="store-header-title" id="appHeaderName">SARFRAZ General and Grossary Store Newjatoi</h5>
+                    <h5 class="store-header-title" id="appHeaderName">Indus General and Grossary Store Newjatoi</h5>
                     <div class="store-header-subtitle"><i class="fa-solid fa-location-dot me-1"></i> Newjatoi, Sindh •
                         Customer Khata MIS</div>
                 </div>
@@ -716,7 +716,7 @@
 
         <div class="android-app-card print-receipt-sheet bg-white p-3 p-md-4">
             <div class="text-center border-bottom pb-3 mb-3">
-                <h4 class="fw-bold text-dark mb-0" id="receiptShopName">SARFRAZ General and Grossary Store Newjatoi</h4>
+                <h4 class="fw-bold text-dark mb-0" id="receiptShopName">Indus General and Grossary Store Newjatoi</h4>
                 <div class="small text-muted" id="receiptShopTagline">Fresh Groceries & Monthly Khata Facility</div>
                 <div class="small text-muted mt-1" id="receiptShopContact">Newjatoi, Sindh • Phone: +92 300 1234567
                 </div>
@@ -1065,17 +1065,17 @@
 
     <!-- Android App Engine JavaScript -->
     <script>
-        const STORAGE_KEY = 'SARFRAZ_STORE_DB_NEWJATOI';
+        const STORAGE_KEY = 'Indus_STORE_DB_NEWJATOI';
 
-        // Preloaded Database with exact SARFRAZ Store Name & Scenario (600 bill - 500 paid = 100 due)
+        // Preloaded Database with exact Indus Store Name & Scenario (600 bill - 500 paid = 100 due)
         const defaultDatabase = {
             settings: {
-                shop_name: "SARFRAZ General and Grossary Store Newjatoi",
+                shop_name: "Indus General and Grossary Store Newjatoi",
                 shop_tagline: "Fresh Groceries & Monthly Salary Khata Service",
                 shop_phone: "+92 300 1234567",
                 shop_address: "Main Commercial Bazaar, Newjatoi, Sindh",
                 currency_symbol: "Rs.",
-                footer_note: "SARFRAZ General and Grossary Store Newjatoi. Please clear your dues on your monthly salary date."
+                footer_note: "Indus General and Grossary Store Newjatoi. Please clear your dues on your monthly salary date."
             },
             customers: [
                 {
@@ -1090,7 +1090,7 @@
                 },
                 {
                     id: 2,
-                    name: "Sarfraz Ahmed (Govt Employee)",
+                    name: "Indus Ahmed (Govt Employee)",
                     phone: "0333-8884321",
                     address: "Main Road, Newjatoi",
                     salary_day: 1,
@@ -1167,10 +1167,10 @@
                     let parsed = JSON.parse(raw);
                     if (parsed.settings) {
                         if (parsed.settings.shop_name) {
-                            parsed.settings.shop_name = parsed.settings.shop_name.replace(/SARFRAN/gi, 'SARFRAZ');
+                            parsed.settings.shop_name = parsed.settings.shop_name.replace(/SARFRAN/gi, 'Indus');
                         }
                         if (parsed.settings.footer_note) {
-                            parsed.settings.footer_note = parsed.settings.footer_note.replace(/SARFRAN/gi, 'SARFRAZ');
+                            parsed.settings.footer_note = parsed.settings.footer_note.replace(/SARFRAN/gi, 'Indus');
                         }
                     }
                     localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
@@ -2055,7 +2055,7 @@
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(db, null, 2));
             const dl = document.createElement('a');
             dl.setAttribute("href", dataStr);
-            dl.setAttribute("download", `SARFRAZ_Store_Khata_${new Date().toISOString().split('T')[0]}.json`);
+            dl.setAttribute("download", `Indus_Store_Khata_${new Date().toISOString().split('T')[0]}.json`);
             dl.click();
         }
 
@@ -2090,7 +2090,7 @@
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.setAttribute('href', url);
-            a.setAttribute('download', `SARFRAZ_Salary_Dues_${new Date().toISOString().split('T')[0]}.csv`);
+            a.setAttribute('download', `Indus_Salary_Dues_${new Date().toISOString().split('T')[0]}.csv`);
             a.click();
         }
 
